@@ -12,10 +12,4 @@
     <ProjectReference Include="..\SysTINSClass\SysTINSClass.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="SysTINSClass">
-      <HintPath>..\SysTINSClass\bin\Debug\net8.0\SysTINSClass.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

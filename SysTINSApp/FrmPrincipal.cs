@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SysTINSClass;
 
 namespace SysTINSApp
 {
@@ -22,6 +23,18 @@ namespace SysTINSApp
             FrmUsuarios frmUsuarios = new();
             //frmUsuarios.MdiParent = this;
             frmUsuarios.ShowDialog();
+        }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+            //var cmd = Banco.Abrir();
+            //cmd.CommandText = "select * from niveis where id = 1";
+            //var dr = cmd.ExecuteReader();// conteudo do resultado é um DataRead(resultado) o que retorna do banco 
+            //if (dr.Read())
+            //{
+            //    MessageBox.Show($" Olá {dr.GetString(1)}");
+            //}
+           
         }
     }
 }
