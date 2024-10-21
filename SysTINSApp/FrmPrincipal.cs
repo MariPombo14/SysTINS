@@ -34,6 +34,8 @@ namespace SysTINSApp
             //{
             //    MessageBox.Show($" Olá {dr.GetString(1)}");
             //}
+          
+            // Nivel.ObterLista();
            
         }
     }
