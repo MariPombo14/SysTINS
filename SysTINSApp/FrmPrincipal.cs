@@ -20,23 +20,31 @@ namespace SysTINSApp
 
         private void novoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            FrmUsuarios frmUsuarios = new();
-            //frmUsuarios.MdiParent = this;
-            frmUsuarios.ShowDialog();
+            FrmUsuarios frmUsuarios = new(); // cria uma instância (objeto) dos FrmUsuarios
+            frmUsuarios.MdiParent = this; // asssocia esta instancia ao container (MDI) FrmPrincipal 
+            frmUsuarios.Show(); // exibe o form Usuarios na janela do sistema
         }
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            //var cmd = Banco.Abrir();
-            //cmd.CommandText = "select * from niveis where id = 1";
-            //var dr = cmd.ExecuteReader();// conteudo do resultado é um DataRead(resultado) o que retorna do banco 
-            //if (dr.Read())
-            //{
-            //    MessageBox.Show($" Olá {dr.GetString(1)}");
-            //}
-          
-            // Nivel.ObterLista();
-           
+            Hide();
+            FrmLogin frmLogin = new();
+            if (frmLogin.ShowDialog() == DialogResult.OK) 
+            {
+                tsslUsuario.Text = Program.UsuarioLogado.Nome + " - " + Program.UsuarioLogado.Nivel.Nome;
+                Show();
+            }
+            else
+                Application.Exit();
+            
         }
     }
 }
+// showdialog - obrigatoriamente retrona valor
+//Hide();
+//FrmLogin frmLogin = new();
+//var retorno = frmLogin.ShowDialog();
+//if (retorno == DialogResult.OK)
+//    Show();
+//else
+//    Application.Exit();

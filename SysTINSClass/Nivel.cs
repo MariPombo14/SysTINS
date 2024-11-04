@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +9,7 @@ namespace SysTINSClass
     public class Nivel
     {
         public int Id { get; set; }
-        public string?Nome { get; set; }
+        public string Nome { get; set; }
         public string? Sigla{ get; set;} // ? podem receber vlaroes nulos
 
         public Nivel() { } // metodo construstor (new)
@@ -43,10 +42,10 @@ namespace SysTINSClass
             Nivel nivel = new();
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.Text ;
-            cmd.CommandText = $"select nome, id ,sigla from niveis where id = {id}"; // Ordem da consultar é a que será mostrado
+            cmd.CommandText = $"select id, nome ,sigla from niveis where id = {id}"; // Ordem da consultar é a que será mostrado
                                                                                      // e voce deve mudar as posições abaixo (0),(1),(2)
             var dr = cmd.ExecuteReader();
-            if(dr.Read())
+            if(dr.Read()) // Quando eu sei que ele vai retornar nada ou 1 pelo menos
 
             {
                //nivel.Id = dr.GetInt32(0);
@@ -67,7 +66,7 @@ namespace SysTINSClass
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = "select * from niveis order by nome asc";
             var dr = cmd.ExecuteReader();
-            while(dr.Read()) 
+            while(dr.Read()) // Para retorna mais de um valor 
             {
                 lista.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
             }

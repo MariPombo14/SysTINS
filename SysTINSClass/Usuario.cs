@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Mysqlx.Crud;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Threading.Tasks;
+using Org.BouncyCastle.Asn1.Esf;
 
 namespace SysTINSClass
 {
@@ -52,21 +55,109 @@ namespace SysTINSClass
         public void Inserir() 
         {
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+           //cmd.CommandText = $"insert into usuarios values (0, '{Nome}','{Email}', md5({Senha}), {Nivel.Id}, default)"; // quando não existe procedure criada 
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "sp_usuario_insert";
             cmd.Parameters.Add("spnome", MySql.Data.MySqlClient.MySqlDbType.VarChar).Value=Nome;
             cmd.Parameters.AddWithValue("spemail", Email);
             cmd.Parameters.AddWithValue("spsenha", Senha);
-            cmd.Parameters.AddWithValue("spnivel", Nivel);
+            cmd.Parameters.AddWithValue("spnivel", Nivel.Id);
             var dr = cmd .ExecuteReader();
             if (dr.Read()) 
             {
                 Id = dr.GetInt32(0);
             }
             cmd.Connection.Close();
-        }  
+        } 
+         // ObterporId
+         public static Usuario ObterporId(int id) 
+        {
+            Usuario usuario = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from usuarios where id = {id}";
+            var dr = cmd .ExecuteReader();
+           if (dr.Read()) 
+            {
+                usuario = new(
+                    dr.GetInt32(0),
+                    dr.GetString(1),
+                    dr.GetString(2),
+                    dr.GetString(3),
+                    Nivel.ObterPorId(dr.GetInt32(4)),
+                    dr.GetBoolean(5)
+                    );
+            }
+
+            return usuario;
+        }
+        public static List<Usuario> ObterLista() 
+        {
+            List<Usuario> lista = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from usuarios order by nome asc";
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                lista.Add ( new(
+                    dr.GetInt32(0),
+                    dr.GetString(1),
+                    dr.GetString(2),
+                    dr.GetString(3),
+                    Nivel.ObterPorId(dr.GetInt32(4)),
+                    dr.GetBoolean(5)
+                    )
+               );
+            }
+            return lista;
+
+        }
+        public bool Atualizar()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "sp_usuario_altera"; // Toda procedure retorna um inteiro 
+            cmd.Parameters.AddWithValue("spid",Id);
+            cmd.Parameters.AddWithValue("spnome", Nome);
+           // Outra forma de realizar - object[,] param = { { "spid", Id }, { "spnome", Nome } };// Matriz(parametro e valor) 
+           // cmd.Parameters.AddRange(param);
+            cmd.Parameters.AddWithValue("spsenha", Senha);
+            cmd.Parameters.AddWithValue("spnivel", Nivel.Id);
+            return cmd.ExecuteNonQuery() > 0? true : false;
+        }
+        // Efetuar login
+        public static Usuario EfetuarLogin(string email, string senha)
+        {
+            Usuario usuario = new(); //Antigamente era new Usuario();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from usuarios where email = '{email}' and senha = md5('{senha}') and ativo = 1";
+            var dr = cmd.ExecuteReader();
+            if(dr.Read())
+            {
+                usuario = new(
+                    dr.GetInt32(0),
+                    dr.GetString(1),
+                    dr.GetString(2),
+                    dr.GetString(3),
+                    Nivel.ObterPorId(dr.GetInt32(4)),
+                    dr.GetBoolean(5)
+                 );
+            }
+            return usuario;
+          
+        }
+               // Queue utiliza o conceito do primeiro que entrar 
     }
 }
+
+//CREATE DEFINER =`root`@`localhost` PROCEDURE `sp_usuario_altera`(
+//-- parâmetros da procedure
+//spid int, spnome varchar(60), spsenha varchar(32), spnivel int)
+//begin
+//	update usuarios 
+//	set nome = spnome, senha = md5(spsenha), nivel_id = spnivel where id = spid;
+//end$$
+
+
 
 //CREATE DEFINER =`root`@`localhost` PROCEDURE `sp_usuario_insert`(
 //-- parâmetros da procedure
