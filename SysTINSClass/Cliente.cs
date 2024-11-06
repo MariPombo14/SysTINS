@@ -72,8 +72,43 @@ namespace SysTINSClass
            
 
         }
-
-
+        // Inserir Cliente
+        
+        public void Inserir()
+        {
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_cliente_insert";
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("spcpf", Cpf);
+            cmd.Parameters.AddWithValue("sptelefone", Telefone);
+            cmd.Parameters.AddWithValue("spemail", Email);
+            cmd.Parameters.AddWithValue("spdatanasc", DataNasc);
+            cmd.Parameters.AddWithValue("spdatacad", DataCad);
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
+        }
+         //Obter por Id
+        public static Cliente ObterPorId(int id)
+        {
+            Cliente cliente = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from cliente where id = {id}";
+            var dr = cmd.ExecuteReader();
+            while(dr.Read())
+            {
+                cliente = new(
+                     dr.GetInt32(0),
+                    dr.GetString(1),
+                    dr.GetString(2),
+                    dr.GetDouble(3),
+                    dr.GetString(4),
+                    dr.GetString(5),
+                    dr.GetString(6)
+                    );
+            }
+            cmd.Connection.Close();
+        }
 
 
     }

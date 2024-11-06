@@ -11,4 +11,4 @@ namespace SysTINSClass
 
     }
 }
-// Uma lista por id e por cliente = cliente_id 
+// Obter lista por cliente_id 
