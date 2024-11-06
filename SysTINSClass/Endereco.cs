@@ -8,6 +8,7 @@ namespace SysTINSClass
 {
     public class Endereco
     {
+
     }
 }
 // Uma lista por id e por cliente = cliente_id 
