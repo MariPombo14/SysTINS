@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SysTINSClass
 {
-    internal class Endereco
+    public class Endereco
     {
     }
 }
+// Uma lista por id e por cliente = cliente_id 

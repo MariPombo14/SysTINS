@@ -11,7 +11,7 @@ namespace SysTINSClass
     public class Categoria
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public string? Sigla { get; set; } 
 
         public Categoria() { } 
@@ -29,17 +29,10 @@ namespace SysTINSClass
             Sigla = sigla;
         }
 
-        public Categoria(int id, string nome)
-        {
-            Id = id;
-            Nome = nome;
-        }
-
         // Inserir categoria 
         public void Inserir()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = $"Insert categoria (nome,sigla) values ('{Nome}','{Sigla}') "; 
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
@@ -49,41 +42,41 @@ namespace SysTINSClass
        // Obter por Id
         public static Categoria ObterPorId(int id)
         {
-            Categoria categoria = new();
+            Categoria categoria_id = new();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = $"select id, nome ,sigla from niveis where id = {id}"; 
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = $"select id, nome ,sigla from categorias where id = {id}"; 
             var dr = cmd.ExecuteReader();
             if (dr.Read())
 
             { 
-                categoria = new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
+                categoria_id = new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
             }
             cmd.Connection.Close();
-            return categoria;
+            return categoria_id;
         }
 
             // Obter Lista
             public static List<Categoria> ObterLista()
         {
-            List<Categoria> lista = new();
+            List<Categoria> categorias = new();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "select * from categoria order by nome asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())  
             {
-                lista.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
+                categorias.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
             }
             cmd.Connection.Close();
-            return lista;
+            return categorias;
         }
         // Atualizar ou alterar 
         public bool Atualizar()
         {
             bool resposta = false;
             var cmd = Banco.Abrir();
-            cmd.CommandType |= System.Data.CommandType.Text;
+            cmd.CommandType |= System.Data.CommandType.StoredProcedure;
             cmd.CommandText = $"update categorias set nome'{Nome}', sigla = '{Sigla}'where id = {Id}";
             return cmd.ExecuteNonQuery() > 0 ? true : false;
         }
