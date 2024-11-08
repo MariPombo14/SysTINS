@@ -98,16 +98,19 @@ namespace SysTINSClass
             while(dr.Read())
             {
                 cliente = new(
-                     dr.GetInt32(0),
+                    dr.GetInt32(0),
                     dr.GetString(1),
                     dr.GetString(2),
-                    dr.GetDouble(3),
+                    dr.GetString(3),
                     dr.GetString(4),
-                    dr.GetString(5),
-                    dr.GetString(6)
+                    dr.GetDateTime(5),
+                    dr.GetDateTime(6),
+                    dr.GetBoolean(7)
                     );
+               
             }
-            cmd.Connection.Close();
+            return cliente;
+       
         }
 
 
