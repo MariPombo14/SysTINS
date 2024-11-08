@@ -23,7 +23,7 @@ namespace SysTINSClass
 
         public Cliente()
         {
-            List<Endereco> enderecos = new();
+            Enderecos = new(); 
         }
 
         public Cliente(int id, string? nome, string? cpf, string? telefone, string? email, DateTime datanasc, DateTime datacad, bool ativo)
@@ -72,8 +72,18 @@ namespace SysTINSClass
            
 
         }
+
+        public Cliente(int id, string? nome, string? telefone, DateTime datanasc)
+        {
+            Id = id;
+            Nome = nome;
+            Telefone = telefone;
+            DataNasc = datanasc;
+
+
+        }
         // Inserir Cliente
-        
+
         public void Inserir()
         {
             var cmd = Banco.Abrir();

@@ -77,7 +77,7 @@ namespace SysTINSClass
             bool resposta = false;
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = $"sp_cateoria_update";
+            cmd.CommandText = $"sp_categoria_update";
             cmd.Parameters.AddWithValue("spid", Id);
             cmd.Parameters.AddWithValue("spnome",Nome);
             cmd.Parameters.AddWithValue("spsigla", Sigla);
