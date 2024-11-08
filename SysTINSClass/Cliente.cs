@@ -98,7 +98,7 @@ namespace SysTINSClass
             while(dr.Read())
             {
                 cliente = new(
-                    dr.GetInt32(0),
+                     dr.GetInt32(0),
                     dr.GetString(1),
                     dr.GetString(2),
                     dr.GetString(3),
@@ -107,13 +107,48 @@ namespace SysTINSClass
                     dr.GetDateTime(6),
                     dr.GetBoolean(7)
                     );
-               
             }
             return cliente;
-       
         }
-
-
+        public static List<Cliente> ObterLista()
+        {
+            List<Cliente> clientes = new();
+            var cmd = Banco.Abrir();
+            cmd.CommandText = $"select * from clientes order by descricao asc";
+            var dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                clientes.Add(new(
+                   dr.GetInt32(0),
+                    dr.GetString(1),
+                    dr.GetString(2),
+                    dr.GetString(3),
+                    dr.GetString(4),
+                    dr.GetDateTime(5),
+                    dr.GetDateTime(6),
+                    dr.GetBoolean(7)
+                    ));
+            }
+            return clientes;
+        }
+        public bool Atualizar()
+        {
+            bool resposta = false;
+            var cmd = Banco.Abrir();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_cliente_update";
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("sptelefone", Telefone);
+            cmd.Parameters.AddWithValue("spdatanasc", DataNasc);
+            if (cmd.ExecuteNonQuery() > 0)
+            {
+                cmd.Connection.Close();
+                resposta = true;
+            }
+            return resposta;
+        }
+        
     }
 }
 //id int(4) AI PK 
