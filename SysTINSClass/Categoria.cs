@@ -33,7 +33,10 @@ namespace SysTINSClass
         public void Inserir()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"Insert categoria (nome,sigla) values ('{Nome}','{Sigla}') "; 
+            cmd.CommandType =  System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "sp_categoria_insert";
+            cmd.Parameters.AddWithValue("spnome", Nome);
+            cmd.Parameters.AddWithValue("spnome", Sigla);
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
@@ -42,18 +45,17 @@ namespace SysTINSClass
        // Obter por Id
         public static Categoria ObterPorId(int id)
         {
-            Categoria categoria_id = new();
+            Categoria categoria = new();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = $"select id, nome ,sigla from categorias where id = {id}"; 
+            cmd.CommandText = $"select * from categorias where id = {id}"; 
             var dr = cmd.ExecuteReader();
-            if (dr.Read())
+            while (dr.Read())
 
             { 
-                categoria_id = new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
+                categoria = new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
             }
-            cmd.Connection.Close();
-            return categoria_id;
+           
+            return categoria;
         }
 
             // Obter Lista
@@ -61,14 +63,12 @@ namespace SysTINSClass
         {
             List<Categoria> categorias = new();
             var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "select * from categoria order by nome asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())  
             {
                 categorias.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
             }
-            cmd.Connection.Close();
             return categorias;
         }
         // Atualizar ou alterar 
@@ -76,17 +76,28 @@ namespace SysTINSClass
         {
             bool resposta = false;
             var cmd = Banco.Abrir();
-            cmd.CommandType |= System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = $"update categorias set nome'{Nome}', sigla = '{Sigla}'where id = {Id}";
-            return cmd.ExecuteNonQuery() > 0 ? true : false;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = $"sp_cateoria_update";
+            cmd.Parameters.AddWithValue("spid", Id);
+            cmd.Parameters.AddWithValue("spnome",Nome);
+            cmd.Parameters.AddWithValue("spsigla", Sigla);
+            if(cmd.ExecuteNonQuery() > 0)
+            {
+                cmd.Connection.Close();
+                resposta = true;
+            }
+            return resposta;
         }
 
         // Deletar 
         public void Excluir()
         {
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"delete from categoria where id = {Id}";
+            cmd.CommandType |= System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = $"sp_categoria_delete";
+            cmd.Parameters.AddWithValue("spid", Id);
             cmd.ExecuteNonQuery();
+            cmd.Connection.Close();
         }
     }
 }
