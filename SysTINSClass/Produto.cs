@@ -129,15 +129,6 @@ namespace SysTINSClass
             }
             return resposta;
         }
-        public void Excluir()
-        {
-            var cmd = Banco.Abrir();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "sp_produto_delete";
-            cmd.Parameters.AddWithValue("spid", Id);
-            cmd.ExecuteNonQuery();
-            cmd.Connection.Close();
-        }
 
     }
 }
