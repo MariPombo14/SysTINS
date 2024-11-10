@@ -31,7 +31,7 @@
             comboBox1 = new ComboBox();
             btnInserir = new Button();
             btnConsultar = new Button();
-            Id = new Label();
+            lblId = new Label();
             textBox1 = new TextBox();
             textBox2 = new TextBox();
             lblNome = new Label();
@@ -67,14 +67,14 @@
             btnConsultar.Text = "Consultar";
             btnConsultar.UseVisualStyleBackColor = true;
             // 
-            // Id
+            // lblId
             // 
-            Id.AutoSize = true;
-            Id.Location = new Point(144, 88);
-            Id.Name = "Id";
-            Id.Size = new Size(18, 15);
-            Id.TabIndex = 3;
-            Id.Text = "ID";
+            lblId.AutoSize = true;
+            lblId.Location = new Point(144, 88);
+            lblId.Name = "lblId";
+            lblId.Size = new Size(18, 15);
+            lblId.TabIndex = 3;
+            lblId.Text = "ID";
             // 
             // textBox1
             // 
@@ -148,7 +148,7 @@
             Controls.Add(lblNome);
             Controls.Add(textBox2);
             Controls.Add(textBox1);
-            Controls.Add(Id);
+            Controls.Add(lblId);
             Controls.Add(btnConsultar);
             Controls.Add(btnInserir);
             Controls.Add(comboBox1);
@@ -163,7 +163,7 @@
         private ComboBox comboBox1;
         private Button btnInserir;
         private Button btnConsultar;
-        private Label Id;
+        private Label lblId;
         private TextBox textBox1;
         private TextBox textBox2;
         private Label lblNome;

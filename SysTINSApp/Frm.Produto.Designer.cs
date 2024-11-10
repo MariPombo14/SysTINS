@@ -30,34 +30,42 @@
         {
             btnInserir = new Button();
             btnAtualizar = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            txtId = new Label();
-            txtCodBar = new Label();
-            txtDesc = new Label();
-            txtVl_Unit = new Label();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            tex = new TextBox();
-            textBox7 = new TextBox();
+            txtId = new TextBox();
+            txtCodBar = new TextBox();
+            lblID = new Label();
+            lblCodBar = new Label();
+            lblDesc = new Label();
+            lblVl_Unit = new Label();
+            txtDesc = new TextBox();
+            txtEstoqueMinimo = new TextBox();
+            txtVlUnit = new TextBox();
+            txtUnidadeVenda = new TextBox();
             btnCancelar = new Button();
             btnConsultar = new Button();
             label1 = new Label();
-            txtClienteId = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            textBox6 = new TextBox();
-            label4 = new Label();
-            label5 = new Label();
-            textBox8 = new TextBox();
-            dataGridView1 = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            lblUnidadeVenda = new Label();
+            lblEstoqueMinimo = new Label();
+            txtDesconto = new TextBox();
+            lblDesconto = new Label();
+            lblData_Cadastro = new Label();
+            txtData_Cadastro = new TextBox();
+            dgvProduto = new DataGridView();
+            clnId = new DataGridViewTextBoxColumn();
+            ClnCodBar = new DataGridViewTextBoxColumn();
+            clnDescrição = new DataGridViewTextBoxColumn();
+            clnValorUnit = new DataGridViewTextBoxColumn();
+            clnEstoqueMinimo = new DataGridViewTextBoxColumn();
+            clnDesconto = new DataGridViewTextBoxColumn();
+            clnCategoria = new DataGridViewTextBoxColumn();
+            clnDataCad = new DataGridViewTextBoxColumn();
+            cmbCategoria = new ComboBox();
+            lblCategoria = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvProduto).BeginInit();
             SuspendLayout();
             // 
             // btnInserir
             // 
-            btnInserir.Location = new Point(130, 231);
+            btnInserir.Location = new Point(184, 232);
             btnInserir.Name = "btnInserir";
             btnInserir.Size = new Size(75, 23);
             btnInserir.TabIndex = 0;
@@ -66,102 +74,96 @@
             // 
             // btnAtualizar
             // 
-            btnAtualizar.Location = new Point(245, 231);
+            btnAtualizar.Location = new Point(300, 232);
             btnAtualizar.Name = "btnAtualizar";
             btnAtualizar.Size = new Size(75, 23);
             btnAtualizar.TabIndex = 1;
             btnAtualizar.Text = "Atualizar";
             btnAtualizar.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(69, 66);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(49, 23);
-            textBox1.TabIndex = 2;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(245, 66);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(137, 23);
-            textBox2.TabIndex = 3;
+            btnAtualizar.Click += btnAtualizar_Click;
             // 
             // txtId
             // 
-            txtId.AutoSize = true;
-            txtId.Location = new Point(69, 48);
+            txtId.Location = new Point(111, 66);
             txtId.Name = "txtId";
-            txtId.Size = new Size(17, 15);
-            txtId.TabIndex = 4;
-            txtId.Text = "ld";
+            txtId.Size = new Size(49, 23);
+            txtId.TabIndex = 2;
             // 
             // txtCodBar
             // 
-            txtCodBar.AutoSize = true;
-            txtCodBar.Location = new Point(245, 48);
+            txtCodBar.Location = new Point(184, 66);
             txtCodBar.Name = "txtCodBar";
-            txtCodBar.Size = new Size(46, 15);
-            txtCodBar.TabIndex = 5;
-            txtCodBar.Text = "CodBar";
+            txtCodBar.Size = new Size(137, 23);
+            txtCodBar.TabIndex = 3;
+            // 
+            // lblID
+            // 
+            lblID.AutoSize = true;
+            lblID.Location = new Point(111, 48);
+            lblID.Name = "lblID";
+            lblID.Size = new Size(17, 15);
+            lblID.TabIndex = 4;
+            lblID.Text = "ld";
+            // 
+            // lblCodBar
+            // 
+            lblCodBar.AutoSize = true;
+            lblCodBar.Location = new Point(184, 48);
+            lblCodBar.Name = "lblCodBar";
+            lblCodBar.Size = new Size(46, 15);
+            lblCodBar.TabIndex = 5;
+            lblCodBar.Text = "CodBar";
+            // 
+            // lblDesc
+            // 
+            lblDesc.AutoSize = true;
+            lblDesc.Location = new Point(349, 48);
+            lblDesc.Name = "lblDesc";
+            lblDesc.Size = new Size(58, 15);
+            lblDesc.TabIndex = 6;
+            lblDesc.Text = "Descrição";
+            // 
+            // lblVl_Unit
+            // 
+            lblVl_Unit.AutoSize = true;
+            lblVl_Unit.Location = new Point(531, 48);
+            lblVl_Unit.Name = "lblVl_Unit";
+            lblVl_Unit.Size = new Size(78, 15);
+            lblVl_Unit.TabIndex = 7;
+            lblVl_Unit.Text = "Valor Unitário";
             // 
             // txtDesc
             // 
-            txtDesc.AutoSize = true;
-            txtDesc.Location = new Point(418, 48);
+            txtDesc.Location = new Point(349, 66);
             txtDesc.Name = "txtDesc";
-            txtDesc.Size = new Size(58, 15);
-            txtDesc.TabIndex = 6;
-            txtDesc.Text = "Descrição";
+            txtDesc.Size = new Size(173, 23);
+            txtDesc.TabIndex = 8;
+            txtDesc.TextChanged += textBox3_TextChanged;
             // 
-            // txtVl_Unit
+            // txtEstoqueMinimo
             // 
-            txtVl_Unit.AutoSize = true;
-            txtVl_Unit.Location = new Point(631, 48);
-            txtVl_Unit.Name = "txtVl_Unit";
-            txtVl_Unit.Size = new Size(78, 15);
-            txtVl_Unit.TabIndex = 7;
-            txtVl_Unit.Text = "Valor Unitário";
+            txtEstoqueMinimo.Location = new Point(207, 154);
+            txtEstoqueMinimo.Name = "txtEstoqueMinimo";
+            txtEstoqueMinimo.Size = new Size(100, 23);
+            txtEstoqueMinimo.TabIndex = 9;
             // 
-            // textBox3
+            // txtVlUnit
             // 
-            textBox3.Location = new Point(419, 66);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(173, 23);
-            textBox3.TabIndex = 8;
-            textBox3.TextChanged += textBox3_TextChanged;
+            txtVlUnit.Location = new Point(531, 66);
+            txtVlUnit.Name = "txtVlUnit";
+            txtVlUnit.Size = new Size(100, 23);
+            txtVlUnit.TabIndex = 11;
             // 
-            // textBox4
+            // txtUnidadeVenda
             // 
-            textBox4.Location = new Point(205, 139);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 9;
-            // 
-            // textBox5
-            // 
-            textBox5.Location = new Point(140, 66);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(65, 23);
-            textBox5.TabIndex = 10;
-            // 
-            // tex
-            // 
-            tex.Location = new Point(631, 66);
-            tex.Name = "tex";
-            tex.Size = new Size(100, 23);
-            tex.TabIndex = 11;
-            // 
-            // textBox7
-            // 
-            textBox7.Location = new Point(86, 139);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(100, 23);
-            textBox7.TabIndex = 12;
+            txtUnidadeVenda.Location = new Point(86, 154);
+            txtUnidadeVenda.Name = "txtUnidadeVenda";
+            txtUnidadeVenda.Size = new Size(100, 23);
+            txtUnidadeVenda.TabIndex = 12;
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(480, 231);
+            btnCancelar.Location = new Point(534, 232);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 23);
             btnCancelar.TabIndex = 13;
@@ -170,7 +172,7 @@
             // 
             // btnConsultar
             // 
-            btnConsultar.Location = new Point(363, 231);
+            btnConsultar.Location = new Point(414, 232);
             btnConsultar.Name = "btnConsultar";
             btnConsultar.Size = new Size(75, 23);
             btnConsultar.TabIndex = 14;
@@ -185,105 +187,178 @@
             label1.Size = new Size(0, 15);
             label1.TabIndex = 16;
             // 
-            // txtClienteId
+            // lblUnidadeVenda
             // 
-            txtClienteId.AutoSize = true;
-            txtClienteId.Location = new Point(140, 48);
-            txtClienteId.Name = "txtClienteId";
-            txtClienteId.Size = new Size(57, 15);
-            txtClienteId.TabIndex = 17;
-            txtClienteId.Text = "Cliente Id";
+            lblUnidadeVenda.AutoSize = true;
+            lblUnidadeVenda.Location = new Point(86, 136);
+            lblUnidadeVenda.Name = "lblUnidadeVenda";
+            lblUnidadeVenda.Size = new Size(86, 15);
+            lblUnidadeVenda.TabIndex = 18;
+            lblUnidadeVenda.Text = "Unidade Venda";
             // 
-            // label3
+            // lblEstoqueMinimo
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(86, 121);
-            label3.Name = "label3";
-            label3.Size = new Size(86, 15);
-            label3.TabIndex = 18;
-            label3.Text = "Unidade Venda";
+            lblEstoqueMinimo.AutoSize = true;
+            lblEstoqueMinimo.Location = new Point(207, 136);
+            lblEstoqueMinimo.Name = "lblEstoqueMinimo";
+            lblEstoqueMinimo.Size = new Size(94, 15);
+            lblEstoqueMinimo.TabIndex = 19;
+            lblEstoqueMinimo.Text = "Estoque Minimo";
             // 
-            // label2
+            // txtDesconto
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(207, 119);
-            label2.Name = "label2";
-            label2.Size = new Size(94, 15);
-            label2.TabIndex = 19;
-            label2.Text = "Estoque Minimo";
+            txtDesconto.Location = new Point(339, 154);
+            txtDesconto.Name = "txtDesconto";
+            txtDesconto.Size = new Size(100, 23);
+            txtDesconto.TabIndex = 20;
             // 
-            // textBox6
+            // lblDesconto
             // 
-            textBox6.Location = new Point(338, 139);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(100, 23);
-            textBox6.TabIndex = 20;
+            lblDesconto.AutoSize = true;
+            lblDesconto.Location = new Point(339, 141);
+            lblDesconto.Name = "lblDesconto";
+            lblDesconto.Size = new Size(57, 15);
+            lblDesconto.TabIndex = 21;
+            lblDesconto.Text = "Desconto";
             // 
-            // label4
+            // lblData_Cadastro
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(338, 121);
-            label4.Name = "label4";
-            label4.Size = new Size(57, 15);
-            label4.TabIndex = 21;
-            label4.Text = "Desconto";
+            lblData_Cadastro.AutoSize = true;
+            lblData_Cadastro.Location = new Point(458, 141);
+            lblData_Cadastro.Name = "lblData_Cadastro";
+            lblData_Cadastro.Size = new Size(97, 15);
+            lblData_Cadastro.TabIndex = 22;
+            lblData_Cadastro.Text = "Data de Cadastro";
             // 
-            // label5
+            // txtData_Cadastro
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(480, 121);
-            label5.Name = "label5";
-            label5.Size = new Size(97, 15);
-            label5.TabIndex = 22;
-            label5.Text = "Data de Cadastro";
+            txtData_Cadastro.Location = new Point(458, 159);
+            txtData_Cadastro.Name = "txtData_Cadastro";
+            txtData_Cadastro.Size = new Size(100, 23);
+            txtData_Cadastro.TabIndex = 23;
             // 
-            // textBox8
+            // dgvProduto
             // 
-            textBox8.Location = new Point(480, 139);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(100, 23);
-            textBox8.TabIndex = 23;
+            dgvProduto.AllowUserToAddRows = false;
+            dgvProduto.AllowUserToDeleteRows = false;
+            dgvProduto.AllowUserToResizeColumns = false;
+            dgvProduto.AllowUserToResizeRows = false;
+            dgvProduto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProduto.Columns.AddRange(new DataGridViewColumn[] { clnId, ClnCodBar, clnDescrição, clnValorUnit, clnEstoqueMinimo, clnDesconto, clnCategoria, clnDataCad });
+            dgvProduto.Location = new Point(50, 293);
+            dgvProduto.Name = "dgvProduto";
+            dgvProduto.RowHeadersVisible = false;
+            dgvProduto.Size = new Size(697, 128);
+            dgvProduto.TabIndex = 25;
+            dgvProduto.CellClick += dgvProduto_CellClick;
             // 
-            // dataGridView1
+            // clnId
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(71, 288);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(549, 150);
-            dataGridView1.TabIndex = 25;
+            clnId.Frozen = true;
+            clnId.HeaderText = "ID";
+            clnId.Name = "clnId";
+            clnId.ReadOnly = true;
+            clnId.Width = 50;
+            // 
+            // ClnCodBar
+            // 
+            ClnCodBar.Frozen = true;
+            ClnCodBar.HeaderText = "CodBar";
+            ClnCodBar.Name = "ClnCodBar";
+            ClnCodBar.ReadOnly = true;
+            // 
+            // clnDescrição
+            // 
+            clnDescrição.Frozen = true;
+            clnDescrição.HeaderText = "Descrição";
+            clnDescrição.Name = "clnDescrição";
+            clnDescrição.ReadOnly = true;
+            // 
+            // clnValorUnit
+            // 
+            clnValorUnit.Frozen = true;
+            clnValorUnit.HeaderText = "ValorUnit";
+            clnValorUnit.Name = "clnValorUnit";
+            clnValorUnit.ReadOnly = true;
+            clnValorUnit.Width = 80;
+            // 
+            // clnEstoqueMinimo
+            // 
+            clnEstoqueMinimo.Frozen = true;
+            clnEstoqueMinimo.HeaderText = "EstoqueMinimo";
+            clnEstoqueMinimo.Name = "clnEstoqueMinimo";
+            clnEstoqueMinimo.ReadOnly = true;
+            // 
+            // clnDesconto
+            // 
+            clnDesconto.Frozen = true;
+            clnDesconto.HeaderText = "Desconto";
+            clnDesconto.Name = "clnDesconto";
+            clnDesconto.ReadOnly = true;
+            // 
+            // clnCategoria
+            // 
+            clnCategoria.Frozen = true;
+            clnCategoria.HeaderText = "Categoria";
+            clnCategoria.Name = "clnCategoria";
+            clnCategoria.ReadOnly = true;
+            // 
+            // clnDataCad
+            // 
+            clnDataCad.Frozen = true;
+            clnDataCad.HeaderText = "DataCad";
+            clnDataCad.Name = "clnDataCad";
+            clnDataCad.ReadOnly = true;
+            // 
+            // cmbCategoria
+            // 
+            cmbCategoria.FormattingEnabled = true;
+            cmbCategoria.Location = new Point(588, 159);
+            cmbCategoria.Name = "cmbCategoria";
+            cmbCategoria.Size = new Size(121, 23);
+            cmbCategoria.TabIndex = 26;
+            // 
+            // lblCategoria
+            // 
+            lblCategoria.AutoSize = true;
+            lblCategoria.Location = new Point(588, 141);
+            lblCategoria.Name = "lblCategoria";
+            lblCategoria.Size = new Size(58, 15);
+            lblCategoria.TabIndex = 27;
+            lblCategoria.Text = "Categoria";
             // 
             // Frm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(820, 450);
-            Controls.Add(dataGridView1);
-            Controls.Add(textBox8);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(textBox6);
-            Controls.Add(label2);
-            Controls.Add(label3);
-            Controls.Add(txtClienteId);
+            Controls.Add(lblCategoria);
+            Controls.Add(cmbCategoria);
+            Controls.Add(dgvProduto);
+            Controls.Add(txtData_Cadastro);
+            Controls.Add(lblData_Cadastro);
+            Controls.Add(lblDesconto);
+            Controls.Add(txtDesconto);
+            Controls.Add(lblEstoqueMinimo);
+            Controls.Add(lblUnidadeVenda);
             Controls.Add(label1);
             Controls.Add(btnConsultar);
             Controls.Add(btnCancelar);
-            Controls.Add(textBox7);
-            Controls.Add(tex);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(txtVl_Unit);
+            Controls.Add(txtUnidadeVenda);
+            Controls.Add(txtVlUnit);
+            Controls.Add(txtEstoqueMinimo);
             Controls.Add(txtDesc);
+            Controls.Add(lblVl_Unit);
+            Controls.Add(lblDesc);
+            Controls.Add(lblCodBar);
+            Controls.Add(lblID);
             Controls.Add(txtCodBar);
             Controls.Add(txtId);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
             Controls.Add(btnAtualizar);
             Controls.Add(btnInserir);
             Name = "Frm";
             Text = "Frm";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProduto).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -292,27 +367,35 @@
 
         private Button btnInserir;
         private Button btnAtualizar;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private Label txtId;
-        private Label txtCodBar;
-        private Label txtDesc;
-        private Label txtVl_Unit;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox tex;
-        private TextBox textBox7;
+        private TextBox txtId;
+        private TextBox txtCodBar;
+        private Label lblID;
+        private Label lblCodBar;
+        private Label lblDesc;
+        private Label lblVl_Unit;
+        private TextBox txtDesc;
+        private TextBox txtEstoqueMinimo;
+        private TextBox txtVlUnit;
+        private TextBox txtUnidadeVenda;
         private Button btnCancelar;
         private Button btnConsultar;
         private Label label1;
-        private Label txtClienteId;
-        private Label label3;
-        private Label label2;
-        private TextBox textBox6;
-        private Label label4;
-        private Label label5;
-        private TextBox textBox8;
-        private DataGridView dataGridView1;
+        private Label lblUnidadeVenda;
+        private Label lblEstoqueMinimo;
+        private TextBox txtDesconto;
+        private Label lblDesconto;
+        private Label lblData_Cadastro;
+        private TextBox txtData_Cadastro;
+        private DataGridView dgvProduto;
+        private ComboBox cmbCategoria;
+        private Label lblCategoria;
+        private DataGridViewTextBoxColumn clnId;
+        private DataGridViewTextBoxColumn ClnCodBar;
+        private DataGridViewTextBoxColumn clnDescrição;
+        private DataGridViewTextBoxColumn clnValorUnit;
+        private DataGridViewTextBoxColumn clnEstoqueMinimo;
+        private DataGridViewTextBoxColumn clnDesconto;
+        private DataGridViewTextBoxColumn clnCategoria;
+        private DataGridViewTextBoxColumn clnDataCad;
     }
 }
