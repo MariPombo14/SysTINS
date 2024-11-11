@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SysTINSClass;
 
 namespace SysTINSApp
 {
@@ -15,6 +16,122 @@ namespace SysTINSApp
         public FrmProdutos()
         {
             InitializeComponent();
+        }
+
+        private void FrmProdutos_Load(object sender, EventArgs e)
+        {
+            CarregaComboCategoria();
+            CarregaGrid();
+
+        }
+
+        private void CarregaGrid()
+        {
+            var listaProduto = Produto.ObterLista();
+
+            dgvProdutos.Rows.Clear();
+
+            int linha = 0;
+
+            foreach (var produto in listaProduto)
+
+            {
+
+                dgvProdutos.Rows.Add();
+
+                dgvProdutos.Rows[linha].Cells[0].Value = produto.Id;
+
+                dgvProdutos.Rows[linha].Cells[1].Value = produto.CodBar;
+
+                dgvProdutos.Rows[linha].Cells[2].Value = produto.Descricao;
+
+                dgvProdutos.Rows[linha].Cells[3].Value = "R$ " + produto.ValorUnit.ToString("#0.00");
+
+                dgvProdutos.Rows[linha].Cells[4].Value = produto.UnidadeVenda;
+
+                dgvProdutos.Rows[linha].Cells[5].Value = produto.Categoria.Nome;
+
+                dgvProdutos.Rows[linha].Cells[6].Value = produto.EstoqueMinimo;
+
+                dgvProdutos.Rows[linha].Cells[7].Value = (produto.ClasseDesconto * 100).ToString("#0.00") + "%";
+
+                dgvProdutos.Rows[linha].Cells[8].Value = produto.DataCad;
+
+                linha++;
+
+            }
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void CarregaComboCategoria()
+        {
+            // Carregando combox com as categorias
+            var categorias = Categoria.ObterLista();
+            categorias.Add(new(0, ">>>>>>>>>>Nova Categoria<<<<<<<<<<", "NWC"));
+            cmbCategoria.DataSource = categorias;
+            cmbCategoria.DisplayMember = "Nome";
+            cmbCategoria.ValueMember = "Id";
+        }
+
+        private void btnAdicionar_Click(object sender, EventArgs e)
+        {
+            Produto produto = new(
+                txtCodBar.Text,
+                txtDescricao.Text,
+                double.Parse(txtValorUnit.Text),
+                txtUnidadeVenda.Text,
+                Categoria.ObterPorId(Convert.ToInt32(cmbCategoria.SelectedValue)),
+                (double)npEstoqueMinimo.Value, // cast usar um double para converter um decimal 
+                double.Parse(txtDesconto.Text) // o meteodo parse converte string para o int
+                );
+            produto.Inserir();
+            if (produto.Id > 0)
+            {
+                txtId.Text = produto.Id.ToString(); // Converte essa saida para string 
+                CarregaGrid();
+                MessageBox.Show($"Produto cadastrado com o ID {produto.Id}");
+            }
+            else
+            {
+                MessageBox.Show("Falha ao inserir o produto!");
+            }
+
+        }
+
+        private void cmbCategoria_TextChanged(object sender, EventArgs e)
+        {
+            if (cmbCategoria.ValueMember != "" && Convert.ToInt32(cmbCategoria.SelectedValue) == 0)
+            {
+                panel1.Visible = true;
+                txtNewCat.Focus();
+                gpProdutos.Enabled = false; // quando estiver cadastrando a categoria e não será possivel mexer em na parte de produtos
+            }
+            else
+            {
+                panel1.Visible = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Categoria categoria = new(txtNewCat.Text, txtNewCatSigla.Text);
+            categoria.Inserir();
+            txtNewCat.Clear();
+            CarregaComboCategoria();
+            cmbCategoria.SelectedValue = categoria.Id;
+            panel1.Visible = false;
+            gpProdutos.Enabled = true;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
+            gpProdutos.Enabled = true;
+            cmbCategoria.SelectedIndex = 0;
         }
     }
 }

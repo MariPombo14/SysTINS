@@ -26,7 +26,7 @@ namespace SysTINSClass
 
 
 
-        public Produto(string codBar, string? descricao, double valorUnit, string? unidadeVenda, Categoria categoria, double estoqueMinimo, double classeDesconto, DateTime dataCad)
+        public Produto(string codBar, string? descricao, double valorUnit, string? unidadeVenda, Categoria categoria, double estoqueMinimo, double classeDesconto)
         {
             CodBar = codBar;
             Descricao = descricao;

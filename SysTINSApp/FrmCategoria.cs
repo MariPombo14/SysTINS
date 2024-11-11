@@ -21,5 +21,10 @@ namespace SysTINSApp
         {
 
         }
+
+        private void FrmCategoria_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -28,6 +28,11 @@ namespace SysTINSClass
             Nome = nome;
             Sigla = sigla;
         }
+        public Categoria(int id, string? nome)
+        {
+            Id = id;
+            Nome = nome;
+        }
 
         // Inserir categoria 
         public void Inserir()
@@ -36,7 +41,7 @@ namespace SysTINSClass
             cmd.CommandType =  System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "sp_categoria_insert";
             cmd.Parameters.AddWithValue("spnome", Nome);
-            cmd.Parameters.AddWithValue("spnome", Sigla);
+            cmd.Parameters.AddWithValue("spsigla", Sigla);
             cmd.ExecuteNonQuery();
             cmd.Connection.Close();
         }
@@ -52,9 +57,9 @@ namespace SysTINSClass
             while (dr.Read())
 
             { 
-                categoria = new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2));
+                categoria = new(dr.GetInt32(0), dr.GetString(1));
             }
-           
+            cmd.Connection.Close();
             return categoria;
         }
 
@@ -63,11 +68,14 @@ namespace SysTINSClass
         {
             List<Categoria> categorias = new();
             var cmd = Banco.Abrir();
-            cmd.CommandText = "select * from categoria order by nome asc";
+            cmd.CommandText = "select * from categorias order by nome asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())  
             {
-                categorias.Add(new(dr.GetInt32(0), dr.GetString(1), dr.GetString(2)));
+                categorias.Add(new
+                    (dr.GetInt32(0),
+                    dr.GetString(1)
+                    )) ;
             }
             return categorias;
         }

@@ -29,14 +29,28 @@ namespace SysTINSApp
         {
             Hide();
             FrmLogin frmLogin = new();
-            if (frmLogin.ShowDialog() == DialogResult.OK) 
+            if (frmLogin.ShowDialog() == DialogResult.OK)
             {
                 tsslUsuario.Text = Program.UsuarioLogado.Nome + " - " + Program.UsuarioLogado.Nivel.Nome;
                 Show();
             }
             else
                 Application.Exit();
-            
+
+        }
+
+       
+
+        private void novoInserirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void manterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmProdutos frmProdutos = new();
+            frmProdutos.MdiParent = this;
+            frmProdutos.Show();
         }
     }
 }
