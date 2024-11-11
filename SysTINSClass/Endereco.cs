@@ -85,7 +85,8 @@ namespace SysTINSClass
                 dr.GetString(5),
                 dr.GetString(6),
                 dr.GetString(7),
-                dr.GetString(8)
+                dr.GetString(8),
+                dr.GetString(9)
                 );
             }
 
@@ -110,7 +111,8 @@ namespace SysTINSClass
                 dr.GetString(5),
                 dr.GetString(6),
                 dr.GetString(7),
-                dr.GetString(8))
+                dr.GetString(8),
+                dr.GetString(9))
                 );
             }
             return enderecos;
