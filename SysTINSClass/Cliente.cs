@@ -50,9 +50,9 @@ namespace SysTINSClass
             Ativo = ativo;
 
         }
-        public Cliente(int id, string? nome, string? cpf, string? telefone, string? email, DateTime datanasc, bool ativo)
+        public Cliente(string? nome, string? cpf, string? telefone, string? email, DateTime datanasc, bool ativo)
         {
-            Id = id;
+            
             Nome = nome;
             Cpf = cpf;
             Telefone = telefone;
@@ -124,7 +124,7 @@ namespace SysTINSClass
         {
             List<Cliente> clientes = new();
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"select * from clientes order by descricao asc";
+            cmd.CommandText = $"select * from clientes order by nome asc";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
