@@ -48,7 +48,7 @@ namespace SysTINSClass
             DataNasc = datanasc;
             DataCad = datacad;
             Ativo = ativo;
-
+            //sem id
         }
         public Cliente(string? nome, string? cpf, string? telefone, string? email, DateTime datanasc, bool ativo)
         {
@@ -59,7 +59,7 @@ namespace SysTINSClass
             Email = email;
             DataNasc = datanasc;
             Ativo = ativo;
-
+            // sem data de cadastro
         }
         public Cliente(int id, string? nome, string? cpf, string? telefone, string? email, DateTime datanasc)
         {
@@ -69,7 +69,7 @@ namespace SysTINSClass
             Telefone = telefone;
             Email = email;
             DataNasc = datanasc;
-           
+            // sem data de cadastro e sem ATIVO
 
         }
 
@@ -79,7 +79,7 @@ namespace SysTINSClass
             Nome = nome;
             Telefone = telefone;
             DataNasc = datanasc;
-
+            // Sem data de cadastro, sem ativo,cpf e email
 
         }
         // Inserir Cliente
