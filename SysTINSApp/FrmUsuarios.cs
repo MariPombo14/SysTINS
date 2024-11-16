@@ -1,14 +1,16 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SysTINSClass;
-using static System.Windows.Forms.LinkLabel;
+using ZstdSharp.Unsafe;
 
 namespace SysTINSApp
 {
@@ -18,33 +20,16 @@ namespace SysTINSApp
         {
             InitializeComponent();
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void FrmUsuarios_Load(object sender, EventArgs e)
         {
-            // carregando o combobox de níveis
-            cmbNivel.DataSource = Nivel.ObterLista(); // Objeto do tipo ObterLista retorna uma coleção de objetos do tipo niveis
-            cmbNivel.DisplayMember = "Nome"; // nome que desejo que apareça na tela 
-            cmbNivel.ValueMember = "Id";// Isso é a forma que irá ser repassado(no caso o Id)
+            // carregando o comboBox de níveis 
+            cmbNivel.DataSource = Nivel.ObterLista();
+            cmbNivel.DisplayMember = "Nome";
+            cmbNivel.ValueMember = "Id";
 
-            // carrega grid
+            // carregando o datagrid de usuários
             CarregaGridUsuarios();
         }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnInserir_Click(object sender, EventArgs e)
         {
             Usuario usuario = new(
@@ -57,18 +42,17 @@ namespace SysTINSApp
             if (usuario.Id > 0)
             {
                 // carrega grid
-                // carregando o datagrid de usuários
                 CarregaGridUsuarios();
-                MessageBox.Show($"Usuario {usuario.Nome} inserido com sucesso");
+                MessageBox.Show($"Usuário {usuario.Nome} inserido com sucesso");
                 btnInserir.Enabled = false;
             }
         }
         private void CarregaGridUsuarios()
         {
             dgvUsuarios.Rows.Clear();
-            var listaDeUsuarios = Usuario.ObterLista(); // metodo static da classe  //metodo nao statico é do objeto ou instancia
+            var listaDeUsuarios = Usuario.ObterLista();
             int linha = 0;
-            foreach (var usuario in listaDeUsuarios)       // foreach (Para cada usuario dentro da lista de Usuarios faça)  
+            foreach (var usuario in listaDeUsuarios)
             {
                 dgvUsuarios.Rows.Add();
                 dgvUsuarios.Rows[linha].Cells[0].Value = usuario.Id;
@@ -82,21 +66,22 @@ namespace SysTINSApp
 
         private void dgvUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int linhaAtual = dgvUsuarios.CurrentRow.Index + 1;
+            int linhaAtual = dgvUsuarios.CurrentRow.Index;
             int idUser = Convert.ToInt32(dgvUsuarios.Rows[linhaAtual].Cells[0].Value);
             var usuario = Usuario.ObterporId(idUser);
-            txtid.Text = usuario.Id.ToString();
+            txtId.Text = usuario.Id.ToString();
             txtNome.Text = usuario.Nome;
             txtEmail.Text = usuario.Email;
             chkAtivo.Checked = usuario.Ativo;
             cmbNivel.SelectedValue = usuario.Nivel.Id;
             btnAtualizar.Enabled = true;
+
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             Usuario usuario = new();
-            usuario.Id = int.Parse(txtid.Text);
+            usuario.Id = int.Parse(txtId.Text);
             usuario.Nome = txtNome.Text;
             usuario.Senha = txtSenha.Text;
             usuario.Nivel = Nivel.ObterPorId(Convert.ToInt32(cmbNivel.SelectedValue));
@@ -105,6 +90,7 @@ namespace SysTINSApp
                 CarregaGridUsuarios();
                 MessageBox.Show("Usuário atualizado com sucesso!");
             }
+
         }
     }
 }
