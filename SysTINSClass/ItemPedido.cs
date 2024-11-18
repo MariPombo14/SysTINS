@@ -49,13 +49,13 @@ namespace SysTINSClass
         }
         public static List<ItemPedido> ObterItensPorPedidoId(int id)
         {
-            List<ItemPedido> items = new();
+            List<ItemPedido> itens = new();
             var cmd = Banco.Abrir();
             cmd.CommandText = $"select * from itempedido where pedido_id = {id}";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
-                items.Add(new(
+                itens.Add(new(
                 dr.GetInt32(0),
                 dr.GetInt32(1),
                 Produto.ObterPorId(dr.GetInt32(2)),
@@ -64,7 +64,7 @@ namespace SysTINSClass
                 dr.GetDouble(5)
                ));
             }
-            return items;
+            return itens;
         }
         public void Atualizar()
         {

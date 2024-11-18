@@ -82,6 +82,18 @@ namespace SysTINSClass
             // Sem data de cadastro, sem ativo,cpf e email
 
         }
+        public Cliente(int id, string? nome, string? cpf, string? telefone, string? email, DateTime datanasc, DateTime datacad, bool ativo, List<Endereco> enderecos)
+        {
+            Id = id;
+            Nome = nome;
+            Cpf = cpf;
+            Telefone = telefone;
+            Email = email;
+            DataNasc = datanasc;
+            DataCad = datacad;
+            Ativo = ativo;
+            Enderecos = enderecos;
+        }
         // Inserir Cliente
 
         public void Inserir()
