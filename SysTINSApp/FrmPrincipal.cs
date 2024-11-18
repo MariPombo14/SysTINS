@@ -63,7 +63,7 @@ namespace SysTINSApp
        // private void endereçosToolStripMenuItem_Click(object sender, EventArgs e)
         //{
             //FrmEnderecos frmEnderecos = new();
-            //frmEnderecos.Cliente_id = "";
+            //frmEnderecos.Cliente_id.text = "";
             //frmEnderecos.Show();
         //}
     }

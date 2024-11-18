@@ -98,7 +98,7 @@ namespace SysTINSClass
         {
             List<Endereco> enderecos = new();
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"select * from enderecos where id_cliente = {id}";
+            cmd.CommandText = $"select * from enderecos where cliente_id = {id}";
             var dr = cmd.ExecuteReader();
             while (dr.Read())
             {
