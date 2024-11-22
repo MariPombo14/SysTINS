@@ -20,37 +20,85 @@ namespace SysTINSApp
 
         private void FrmPedidoNovo_Load(object sender, EventArgs e)
         {
+            CarregaGrid();
 
         }
-
-        private void btnInserePedido_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //private void btnAdicionar_Click(object sender, EventArgs e)
+        // private void btnInserir_Click(object sender, EventArgs e)
         //{
-        //    Produto produto = new(
-        //        txtCodBar.Text,
-        //        txtDescricao.Text,
-        //        double.Parse(txtValorUnit.Text),
-        //        txtUnidadeVenda.Text,
-        //        Categoria.ObterPorId(Convert.ToInt32(cmbCategoria.SelectedValue)),
-        //        (double)npEstoqueMinimo.Value, // cast usar um double para converter um decimal 
-        //        double.Parse(txtDesconto.Text) // o meteodo parse converte string para o int
-        //        );
-        //    produto.Inserir();
-        //    if (produto.Id > 0)
+        //    Cliente cliente = new(
+        //       txtNome.Text,
+        //       txtCpf.Text,
+        //       txtTelefone.Text,
+        //       txtEmail.Text,
+        //       DataNasc.Value,
+        //       chkAtivo.Checked
+
+        //       );
+        //    cliente.Inserir();
+        //    if (cliente.Id > 0)
         //    {
-        //        txtId.Text = produto.Id.ToString(); // Converte essa saida para string 
-        //        CarregaGrid();
-        //        MessageBox.Show($"Produto cadastrado com o ID {produto.Id}");
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Falha ao inserir o produto!");
+        //        //carrega grid
+        //        CarregaGridClientes();
+        //        MessageBox.Show($"Cliente {cliente.Nome} inserido com sucesso");
+        //        btnInserir.Enabled = false;
         //    }
 
+
+        //}
+
+       /private void btnInserePedido_Click(object sender, EventArgs e)
+        {
+         Pedido pedido = new(
+            txtUsuario.Text,
+             txtIdCliente
+               );
+         }
+        private void CarregaGrid()
+        {
+            var listaitempedido = ItemPedido.ObterItensPorPedidoId();
+
+            dgvItensPedido.Rows.Clear();
+
+            int linha = 0;
+
+            foreach (var itempedido in listaitempedido) 
+
+            {
+
+                dgvItensPedido.Rows.Add();
+
+                dgvItensPedido.Rows[linha].Cells[0].Value = itempedido.Id;
+
+                dgvItensPedido.Rows[linha].Cells[1].Value = itempedido.Produto.CodBar;
+
+                dgvItensPedido.Rows[linha].Cells[2].Value = itempedido.Produto.Descricao;
+
+                dgvItensPedido.Rows[linha].Cells[3].Value = "R$ " + itempedido.ValorUnit.ToString("#0.00");
+
+                dgvItensPedido.Rows[linha].Cells[4].Value = itempedido.Quantidade;
+
+              / dgvItensPedido.Rows[linha].Cells[5].Value = itempedido.Desconto;
+
+               //dgvProdutos.Rows[linha].Cells[6].Value = TotalItem;
+                // var quantidade * valorUnit = total
+                linha++;
+
+            }
+
+        }
+
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+             ItemPedido itempedido = new(
+             txtIdPedido.Text,
+             Produto.ObterPorId(txtCodBar.Text),
+             Produto.ObterPorId(txtDescricao.Text),
+             double.Parse(txtValorUnit.Text),
+             double.Parse(txtQuantidade.Text),
+             double.Parse(txtDescontoItem.Text)
+             );
+
+        }
     }
-}
 }

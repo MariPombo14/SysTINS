@@ -83,7 +83,7 @@
             dgvProdutos.Name = "dgvProdutos";
             dgvProdutos.ReadOnly = true;
             dgvProdutos.RowHeadersVisible = false;
-            dgvProdutos.Size = new Size(965, 220);
+            dgvProdutos.Size = new Size(966, 220);
             dgvProdutos.TabIndex = 9;
             // 
             // clnId
@@ -477,8 +477,8 @@
         private Label label9;
         private Label label2;
         private TextBox txtId;
-        private TextBox txtCodBar;
-        private TextBox txtDescricao;
+        public TextBox txtCodBar;
+        public TextBox txtDescricao;
         private TextBox txtDesconto;
         private TextBox txtValorUnit;
         private TextBox txtUnidadeVenda;

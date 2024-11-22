@@ -78,6 +78,7 @@ namespace SysTINSApp
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             Cliente cliente = new();
+            cliente.Id = int.Parse(txtId.Text);
             cliente.Nome = txtNome.Text;
             cliente.Telefone = txtTelefone.Text;
             cliente.DataNasc = DataNasc.Value;
