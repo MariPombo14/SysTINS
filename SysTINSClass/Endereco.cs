@@ -33,7 +33,7 @@ namespace SysTINSClass
             Uf = uf;
             TipoEndereco = tipoendereco;
         }
-        public Endereco(int cliente_id, string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipoendereco)
+        public Endereco( int cliente_id, string? cep, string? logradouro, string? numero, string? complemento, string? bairro, string? cidade, string? uf, string? tipoendereco)
         {
             Cliente_id = cliente_id;
             Cep = cep;

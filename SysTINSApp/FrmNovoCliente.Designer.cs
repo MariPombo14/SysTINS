@@ -31,7 +31,7 @@ namespace SysTINSApp
         {
             txtNome = new TextBox();
             txtTelefone = new TextBox();
-            txtId = new TextBox();
+            txtClienteId = new TextBox();
             txtEmail = new TextBox();
             label7 = new Label();
             chkAtivo = new CheckBox();
@@ -40,7 +40,7 @@ namespace SysTINSApp
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            label1 = new Label();
+            lblID = new Label();
             btnAtualizar = new Button();
             btnInserir = new Button();
             txtCpf = new TextBox();
@@ -71,13 +71,13 @@ namespace SysTINSApp
             txtTelefone.Size = new Size(163, 23);
             txtTelefone.TabIndex = 39;
             // 
-            // txtId
+            // txtClienteId
             // 
-            txtId.Location = new Point(150, 118);
-            txtId.Name = "txtId";
-            txtId.ReadOnly = true;
-            txtId.Size = new Size(57, 23);
-            txtId.TabIndex = 38;
+            txtClienteId.Location = new Point(150, 118);
+            txtClienteId.Name = "txtClienteId";
+            txtClienteId.ReadOnly = true;
+            txtClienteId.Size = new Size(57, 23);
+            txtClienteId.TabIndex = 38;
             // 
             // txtEmail
             // 
@@ -152,14 +152,14 @@ namespace SysTINSApp
             label2.TabIndex = 28;
             label2.Text = "Nome";
             // 
-            // label1
+            // lblID
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(150, 100);
-            label1.Name = "label1";
-            label1.Size = new Size(18, 15);
-            label1.TabIndex = 27;
-            label1.Text = "ID";
+            lblID.AutoSize = true;
+            lblID.Location = new Point(150, 100);
+            lblID.Name = "lblID";
+            lblID.Size = new Size(18, 15);
+            lblID.TabIndex = 27;
+            lblID.Text = "ID";
             // 
             // btnAtualizar
             // 
@@ -212,6 +212,7 @@ namespace SysTINSApp
             dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientes.Size = new Size(629, 150);
             dgvClientes.TabIndex = 42;
+            dgvClientes.CellClick += dgvClientes_CellClick_1;
             // 
             // clnId
             // 
@@ -288,7 +289,7 @@ namespace SysTINSApp
             Controls.Add(txtNome);
             Controls.Add(txtCpf);
             Controls.Add(txtTelefone);
-            Controls.Add(txtId);
+            Controls.Add(txtClienteId);
             Controls.Add(txtEmail);
             Controls.Add(label7);
             Controls.Add(chkAtivo);
@@ -297,7 +298,7 @@ namespace SysTINSApp
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblID);
             Controls.Add(btnAtualizar);
             Controls.Add(btnInserir);
             Name = "FrmNovoCliente";
@@ -312,7 +313,7 @@ namespace SysTINSApp
 
         private TextBox txtNome;
         private TextBox txtTelefone;
-        private TextBox txtId;
+        private TextBox txtClienteId;
         private TextBox txtEmail;
         private Label label7;
         private CheckBox chkAtivo;
@@ -321,7 +322,7 @@ namespace SysTINSApp
         private Label label4;
         private Label label3;
         private Label label2;
-        private Label label1;
+        private Label lblID;
         private Button btnAtualizar;
         private Button btnInserir;
         private TextBox txtCpf;

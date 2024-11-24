@@ -60,14 +60,37 @@ namespace SysTINSApp
             frmNovoCliente.Show();
         }
 
-       // private void endereçosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void novoToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            FrmPedidoNovo frmPedidoNovo = new();
+            frmPedidoNovo.MdiParent = this;
+            frmPedidoNovo.Show();
+        }
+
+        private void endereçosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmEnderecos frmEnderecos = new();
+            frmEnderecos.txtCliente_Id.Text = "27";
+            frmEnderecos.Show();
+        }
+
+
+        //frmEnderecos.Show();
+
+        //// Passa o valor diretamente para o TextBox de frmEnderecos
+        //if (frmEnderecos != null)
         //{
-            //FrmEnderecos frmEnderecos = new();
-            //frmEnderecos.Cliente_id.text = "";
-            //frmEnderecos.Show();
-        //}
+        //    frmEnderecos.Cliente_id.Text = txtClienteId.Text;
+        ////}
     }
 }
+
+
+
+
+        //FrmEnderecos frmEnderecos = new();
+        //frmEnderecos.Cliente_id.text = "";
+        //frmEnderecos.Show();
 // showdialog - obrigatoriamente retrona valor
 //Hide();
 //FrmLogin frmLogin = new();

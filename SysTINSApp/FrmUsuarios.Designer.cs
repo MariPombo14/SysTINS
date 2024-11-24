@@ -38,7 +38,7 @@ namespace SysTINSApp
             clnEmail = new DataGridViewTextBoxColumn();
             clnNivel = new DataGridViewTextBoxColumn();
             clnAtivo = new DataGridViewCheckBoxColumn();
-            label1 = new Label();
+            lblId = new Label();
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
@@ -141,14 +141,14 @@ namespace SysTINSApp
             clnAtivo.ReadOnly = true;
             clnAtivo.Width = 40;
             // 
-            // label1
+            // lblId
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(107, 70);
-            label1.Name = "label1";
-            label1.Size = new Size(18, 15);
-            label1.TabIndex = 4;
-            label1.Text = "ID";
+            lblId.AutoSize = true;
+            lblId.Location = new Point(107, 70);
+            lblId.Name = "lblId";
+            lblId.Size = new Size(18, 15);
+            lblId.TabIndex = 4;
+            lblId.Text = "ID";
             // 
             // label2
             // 
@@ -272,7 +272,7 @@ namespace SysTINSApp
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblId);
             Controls.Add(dgvUsuarios);
             Controls.Add(btnAtualizar);
             Controls.Add(btnConsultar);
@@ -291,7 +291,7 @@ namespace SysTINSApp
         private Button btnConsultar;
         private Button btnAtualizar;
         private DataGridView dgvUsuarios;
-        private Label label1;
+        public Label lblId;
         private Label label2;
         private Label label3;
         private Label label4;

@@ -20,38 +20,23 @@ namespace SysTINSApp
 
         private void FrmNovoCliente_Load(object sender, EventArgs e)
         {
-            //var categorias = Categoria.ObterLista();
-            //categorias.Add(new(0, ">>>>>>>>>>Nova Categoria<<<<<<<<<<", "NWC"));
-            //cmbCategoria.DataSource = categorias;
-            //cmbCategoria.DisplayMember = "Nome";
-            //cmbCategoria.ValueMember = "Id"; */
-
-
-            //cmbNivel.DataSource = Nivel.ObterLista(); // Objeto do tipo ObterLista retorna uma coleção de objetos do tipo niveis
-            //cmbNivel.DisplayMember = "Nome"; // nome que desejo que apareça na tela 
-            //cmbNivel.ValueMember = "Id";
-
-
-            //private void btnAtualizar_Click(object sender, EventArgs e)
-            // Exemplo: Recarregar dados de um banco de dados
-            // DataTable dataTable = ObterDadosDoBanco(); // Método para obter dados do banco de dados
-            // dataGridView1.DataSource = dataTable; // Define a fonte de dados do DataGridView
-          
-            
-
+           
             CarregaGridClientes();
         }
-        private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int linhaAtual = dgvClientes.CurrentRow.Index + 1;
-            int idCliente = Convert.ToInt32(dgvClientes.Rows[linhaAtual].Cells[0].Value);
-            var cliente = Cliente.ObterPorId(idCliente);
-            txtNome.Text = cliente.Nome;
-            txtTelefone.Text = cliente.Telefone;
-            DataNasc.Value = cliente.DataNasc;
-            chkAtivo.Checked = cliente.Ativo;
-            btnAtualizar.Enabled = true;
-        }
+
+
+        //private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    int linhaAtual = dgvClientes.CurrentRow.Index + 1;
+        //    int idCliente = Convert.ToInt32(dgvClientes.Rows[linhaAtual].Cells[0].Value);
+        //    var cliente = Cliente.ObterPorId(idCliente);
+        //    txtClienteId.Text = cliente.Id.ToString();
+        //    txtNome.Text = cliente.Nome;
+        //    txtTelefone.Text = cliente.Telefone;
+        //    DataNasc.Value = cliente.DataNasc;
+        //    chkAtivo.Checked = cliente.Ativo;
+        //    btnAtualizar.Enabled = true;
+        //}
         private void btnInserir_Click(object sender, EventArgs e)
         {
             Cliente cliente = new(
@@ -61,14 +46,15 @@ namespace SysTINSApp
                txtEmail.Text,
                DataNasc.Value,
                chkAtivo.Checked
-
                );
+
             cliente.Inserir();
             if (cliente.Id > 0)
             {
                 //carrega grid
+                txtClienteId.Text = cliente.Id.ToString();
                 CarregaGridClientes();
-                MessageBox.Show($"Cliente {cliente.Nome} inserido com sucesso");
+                MessageBox.Show($"Cliente {cliente.Id} inserido com sucesso");
                 btnInserir.Enabled = false;
             }
 
@@ -78,7 +64,7 @@ namespace SysTINSApp
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             Cliente cliente = new();
-            cliente.Id = int.Parse(txtId.Text);
+            txtClienteId.Text = cliente.Id.ToString();
             cliente.Nome = txtNome.Text;
             cliente.Telefone = txtTelefone.Text;
             cliente.DataNasc = DataNasc.Value;
@@ -106,5 +92,20 @@ namespace SysTINSApp
                 linha++;
             }
         }
+        private void dgvClientes_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            int linhaAtual = dgvClientes.CurrentRow.Index + 1;
+            int idCliente = Convert.ToInt32(dgvClientes.Rows[linhaAtual].Cells[0].Value);
+            var cliente = Cliente.ObterPorId(idCliente);
+            txtClienteId.Text = cliente.Id.ToString();
+            txtNome.Text = cliente.Nome;
+            txtTelefone.Text = cliente.Telefone;
+            DataNasc.Value = cliente.DataNasc;
+            chkAtivo.Checked = cliente.Ativo;
+            btnAtualizar.Enabled = true;
+        }
+
+        
     }
 }

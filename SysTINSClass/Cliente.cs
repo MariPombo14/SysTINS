@@ -115,7 +115,7 @@ namespace SysTINSClass
         {
             Cliente cliente = new();
             var cmd = Banco.Abrir();
-            cmd.CommandText = $"select * from cliente where id = {id}";
+            cmd.CommandText = $"select * from clientes where id = {id}";
             var dr = cmd.ExecuteReader();
             while(dr.Read())
             {
@@ -155,7 +155,6 @@ namespace SysTINSClass
         }
         public bool Atualizar()
         {
-            bool resposta = false;
             var cmd = Banco.Abrir();
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "sp_cliente_update";
@@ -163,12 +162,8 @@ namespace SysTINSClass
             cmd.Parameters.AddWithValue("spnome", Nome);
             cmd.Parameters.AddWithValue("sptelefone", Telefone);
             cmd.Parameters.AddWithValue("spdatanasc", DataNasc);
-            if (cmd.ExecuteNonQuery() > 0)
-            {
-                cmd.Connection.Close();
-                resposta = true;
-            }
-            return resposta;
+            return cmd.ExecuteNonQuery() > 0 ? true : false;
+           
         }
         
     }
